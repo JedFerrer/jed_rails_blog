@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LoginSignup</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="structure-container">
+      <div id="header-container">
+        
+      </div>
+
+      <div id="content-container">
+        <%= yield %>
+      </div>
+
+      <div id ="footer-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <h6>© 2016 Copyright Jedidiah Blog | Powered by <a href="http://jedidiah-portfolio.herokuapp.com/">jedidiah-portfolio</a></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

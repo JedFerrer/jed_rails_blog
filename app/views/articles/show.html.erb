@@ -1,0 +1,58 @@
+<div class="container">
+<!-- 	<div class="row">
+		<div class="col-sm-12 pad-top-bottom-20"></div>
+	</div> -->
+</div>
+<div class="container">
+	<div class="row pad-bottom-50">
+		<div class="col-sm-3">
+			<p><%= link_to 'Home', controller: "articles", action: "all" %></p>
+			<h3><%= @user.name %></h3>
+			<p><%= @user.email %></p>
+		</div>
+		<div class="col-sm-7">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Articles</h2>
+								<% if !@article.id.nil? %>
+									<div class="pad-top-bottom-10">
+									  <p>
+									    <strong>Title:</strong>
+									    <%= @article.title %>
+									  </p>
+									  <p>
+									    <strong>Content:</strong>
+									    <%= @article.text %>
+									  </p>
+									  <h5 class="list-group-item-headingclass post-info "> 
+											<%= @article.created_at.strftime("%d %b %y") %>
+											<span class="author-name"><%= @article.user.name %></span>
+										</h5>
+										<% if current_user? @user %>
+										  <p>
+												<%= link_to 'Edit', edit_user_article_path(@user, @article) %>
+												<%= link_to 'Delete', [@article.user, @article],
+							              method: :delete,
+							              data: { confirm: 'Are you sure?' } %>
+										  </p>
+								  	<% end %>
+								  </div>
+							  <%# else %>
+<!-- 										<div class="main-post-container">
+										<div class="list-group-item">
+											<p>Unfortunately, there are no articles to show.</p>
+										</div>
+									</div> -->
+							  <% end %>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<p><%= link_to 'Sign Out', session_path(@user),
+	      method: :delete,
+	      data: { confirm: 'Are you sure?' }, :class => 'btn btn-primary'  %>
+			</p>
+		</div>
+	</div>
+</div>
