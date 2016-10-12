@@ -26,6 +26,6 @@ module SessionsHelper
 	end
 
 	def deny__access
-		redirect_to new_session_path,	:notice => "Please sign in to access the user page."
+		redirect_to new_session_path,	:notice => "Please sign in to access the user page." unless signed_in?
 	end
 end

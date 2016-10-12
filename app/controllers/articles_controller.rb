@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
+  before_filter :deny__access, :except => [:all]
 
   def all
-    # @users = current_user
     if signed_in?
       @user = current_user
     end
@@ -9,81 +9,51 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = @user.articles.build
-      render :action => 'index'
-    else
-      deny__access
-    end
+    @user = User.find(params[:user_id])
+    @article = @user.articles.build
+    render :action => 'index'
   end
 
   def show
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = @user.articles.find(params[:id])
-      # @article = Article.find(params[:id])
-      render :action => 'show'
-    else
-      deny__access
-    end
+    @user = User.find(params[:user_id])
+    @article = @user.articles.find(params[:id])
+    render :action => 'show'
   end
 
   def new
   end
 
   def edit
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = @user.articles.find(params[:id])
-      # @article = Article.find(params[:id])
-      render :action => 'index'
-    else
-      deny__access
-    end
-    # redirect_to user_articles_path(@user, @article)
+    @user = User.find(params[:user_id])
+    @article = @user.articles.find(params[:id])
+    render :action => 'index'
   end
 
   def update
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = Article.find(params[:id])
-      if  @article.update_attributes(article_params)
-        redirect_to user_articles_path(@user)
-      else
-        render :action => 'index'
-      end
+    @user = User.find(params[:user_id])
+    @article = Article.find(params[:id])
+    if  @article.update_attributes(article_params)
+      redirect_to user_articles_path(@user)
     else
-      deny__access
+      render :action => 'index'
     end
-
   end
 
   def create
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = @user.articles.create(article_params)
-      if @article.errors.any?
-        render :action => 'index'
-      else
-        redirect_to user_articles_path(@user)
-      end
-      # render 'users/show'
-      #render :action => 'index'
+    @user = User.find(params[:user_id])
+    @article = @user.articles.create(article_params)
+    if @article.errors.any?
+      render :action => 'index'
     else
-      deny__access
+      redirect_to user_articles_path(@user)
     end
   end
 
   def destroy
-    if signed_in?
-      @user = User.find(params[:user_id])
-      @article = @user.articles.find(params[:id])
-      @article.destroy
-      redirect_to user_articles_path(@user)
-    else
-      deny__access
-    end
+    @user = User.find(params[:user_id])
+    @article = @user.articles.find(params[:id])
+    @article.destroy
+    redirect_to user_articles_path(@user)
   end
 
   private

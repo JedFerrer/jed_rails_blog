@@ -41,6 +41,7 @@ GEM
     arel (7.1.2)
     autoprefixer-rails (6.5.0)
       execjs
+    bcrypt (3.1.11-x86-mingw32)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -153,6 +154,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.2)
