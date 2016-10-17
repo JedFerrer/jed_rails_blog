@@ -9,12 +9,9 @@ class UsersController < ApplicationController
     if User.exists?(:email => user_params[:email])
       flash.now[:notice] = "User email already taken."
       render action: 'new'
-      # redirect_to new_user_path, notice: 'User email already taken'
     else
     	if @user.save
-  			#redirect_to @user, notice: 'User was successfully created.'
-        #redirect_to user_articles_path(@user), notice: 'User was successfully created.'
-        redirect_to new_session_path(@user), notice: 'User was successfully created, You can now login.'
+        redirect_to new_session_path(), notice: 'User was successfully created, You can now login.'
   		else
   			render action: "new"
   		end

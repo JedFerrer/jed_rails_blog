@@ -5,11 +5,13 @@ class ArticlesController < ApplicationController
     if signed_in?
       @user = current_user
     end
-    @articles = Article.order(created_at: :desc)
+    @articles = Article.order('created_at DESC').page(params[:page]).per_page(10)
+
   end
 
   def index
     @user = User.find(params[:user_id])
+    @articles = Article.where('user_id = ?',  @user.id).order('created_at DESC').page(params[:page]).per_page(10)
     @article = @user.articles.build
     render :action => 'index'
   end
@@ -25,6 +27,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
+    @articles = Article.where('user_id = ?',  @user.id).order('created_at DESC').page(params[:page]).per_page(10)
     @article = @user.articles.find(params[:id])
     render :action => 'index'
   end

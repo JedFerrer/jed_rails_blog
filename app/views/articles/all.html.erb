@@ -5,8 +5,8 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h2>Articles</h2>
-						<% @articles.each do |article| %>
-							<% if !article.title.nil? %>
+						<% if !@articles.empty? %>
+							<% @articles.each do |article| %>
 								<div class="pad-top-bottom-10">
 								  <p>
 								    <strong>Title:</strong>
@@ -31,13 +31,14 @@
 									  </p>
 								  <% end %>
 								</div>
-						  <% else %>
+							<% end %>
+							<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+					  <% else %>
 								<div class="main-post-container">
 									<div class="list-group-item">
 										<p>Unfortunately, there are no articles to show.</p>
 									</div>
 								</div>
-						  <% end %>
 						<% end %>
 					</div>
 				</div>

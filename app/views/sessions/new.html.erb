@@ -4,10 +4,11 @@
 		<div class="col-sm-6">
 			<h1>Sign In</h1>
 
-			<% if flash[:error] %>
+			<% if flash[:error] || flash[:alert] %>
 				<div class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<p><%= flash[:error] %></p>
+					<% alert_msg = flash[:error] ? flash[:error] : flash[:alert] %>
+					<p><%= alert_msg %></p>
 				</div>
 			<% end %>
 			<% if flash[:notice] %>

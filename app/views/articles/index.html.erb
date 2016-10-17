@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row pad-bottom-50">
 		<div class="col-sm-3">
-			<p><%= link_to 'Home', controller: "articles", action: "all" %></p>
+			<%= image_tag avatar_url(@user.email, 150), :class => 'img-thumbnail' %>
 			<h3><%= @user.name %></h3>
 			<p><%= @user.email %></p>
 		</div>
@@ -27,9 +27,8 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h2>Articles</h2>
-					<% @user.articles.each do |article| %>
-						<%#= debug article %>
-						<% if !article.id.nil? %>
+					<% if !@articles.empty? %>
+						<% @articles.each do |article| %>
 							<div class="pad-top-bottom-10">
 							  <p>
 							    <strong>Title:</strong>
@@ -52,14 +51,15 @@
 								  </p>
 						  	<% end %>
 						  </div>
-					  <%# else %>
-<!-- 										<div class="main-post-container">
-								<div class="list-group-item">
-									<p>Unfortunately, there are no articles to show.</p>
-								</div>
-							</div> -->
-					  <% end %>
-					<% end %>
+						<% end %>
+						<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+				  <% else %>
+						<div class="main-post-container">
+							<div class="list-group-item">
+								<p>Unfortunately, there are no articles to show.</p>
+							</div>
+						</div>
+				  <% end %>
 				</div>
 			</div>
 		</div>
