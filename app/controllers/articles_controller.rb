@@ -34,6 +34,7 @@ class ArticlesController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
+    @articles = Article.where('user_id = ?',  @user.id).order('created_at DESC').page(params[:page]).per_page(10)
     @article = Article.find(params[:id])
     if  @article.update_attributes(article_params)
       redirect_to user_articles_path(@user)
@@ -44,6 +45,7 @@ class ArticlesController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    @articles = Article.where('user_id = ?',  @user.id).order('created_at DESC').page(params[:page]).per_page(10)
     @article = @user.articles.create(article_params)
     if @article.errors.any?
       render :action => 'index'
